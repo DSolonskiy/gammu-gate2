@@ -1,0 +1,54 @@
+version: "3.8"
+
+########################
+#  СЕТЬ и VOLUME       #
+########################
+networks:
+  smsnet:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+
+########################
+#  СЕРВИСЫ             #
+########################
+services:
+  # ---------- База ----------
+  mariadb:
+    image: mariadb:11.4
+    container_name: mariadb
+    restart: always
+    networks: [smsnet]
+    environment:
+      MARIADB_ROOT_PASSWORD: sUp3rR00tPwd        # ← замени
+      MARIADB_DATABASE: sms
+      MARIADB_USER: smsuser
+      MARIADB_PASSWORD: smsPass123              # ← замени
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # ---------- Единственный модем ----------
+  gammu_modem_01:
+    image: tomaszrim/gammu:1.42
+    container_name: gammu_modem_01
+    restart: always
+    privileged: true
+    networks: [smsnet]
+    depends_on: [mariadb]
+    # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
+    devices:
+      - /dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0:/dev/modem
+    # Конфиги и (опционально) пользовательские скрипты
+    volumes:
+      - ./configs/gammu_modem_01:/etc/gammu:ro
+      - ./scripts:/usr/local/bin:ro
+    # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
+    command: ["gammu-smsd","--config","/etc/gammu/gammu-smsdrc","--foreground"]
+    healthcheck:
+      test: ["CMD","gammu","--identify"]
+      interval: 1m
+      retries: 3
+      start_period: 40s
