@@ -46,7 +46,7 @@ services:
       - ./configs/gammu_modem_01:/etc/gammu:ro
       - ./scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
-    command: ["gammu-smsd", "--config", "/etc/gammu/gammu-smsdrc"]
+    command: ["sh","-c","sleep 3 && gammu-smsd -c /etc/gammu/gammu-smsdrc"]
     healthcheck:
       test: ["CMD","gammu","--identify"]
       interval: 1m
