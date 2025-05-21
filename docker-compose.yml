@@ -32,7 +32,7 @@ services:
 
   # ---------- Единственный модем ----------
   gammu_modem_01:
-    image: tomaszrim/gammu:1.42
+    image: tomaszrim/gammu:latest
     container_name: gammu_modem_01
     restart: always
     privileged: true
