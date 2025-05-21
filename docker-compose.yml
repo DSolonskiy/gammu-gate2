@@ -43,7 +43,7 @@ services:
       - /dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0:/dev/modem
     # Конфиги и (опционально) пользовательские скрипты
     volumes:
-      - ./configs/gammu_modem_01:/etc/gammu:ro
+      - /home/webadmin/gammu/configs/gammu_modem_01:/etc/gammu:ro
       - ./scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
     command: ["sh","-c","sleep 3 && gammu-smsd -c /etc/gammu/gammu-smsdrc"]
