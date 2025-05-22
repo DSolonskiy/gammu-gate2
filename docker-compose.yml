@@ -16,20 +16,29 @@ volumes:
 services:
   # ---------- База ----------
   mariadb:
-    image: mariadb:11.4
+    image: mariadb:11.4-ubi
     container_name: mariadb
     restart: always
-    networks: [smsnet]
+    command: --wait_timeout=28800 --interactive_timeout=28800
+    networks: 
+      - smsnet
     environment:
-      MARIADB_ROOT_PASSWORD: sUp3rR00tPwd        # ← замени
-      MARIADB_DATABASE: sms
-      MARIADB_USER: smsuser
-      MARIADB_PASSWORD: smsPass123              # ← замени
+      - MYSQL_ROOT_PASSWORD=UP5yeFxRcvtMBzjdfNmT6p
+      - MYSQL_USER=sms-gateway
+      - MYSQL_PASSWORD=Bpj7hXNCextgnzSWckFybV
+      - MYSQL_DATABASE=smsd
     volumes:
-      - mariadb_data:/var/lib/mysql
-      - /home/webadmin/gammu/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
+      - /home/webadmin/gammu/db-init:/var/lib/mysql
+     # - mariadb_data:/var/lib/mysql
+     # - /home/webadmin/gammu/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
     ports:
-      - "33061:3306"
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 15s
+      interval: 15s
+      timeout: 5s
+      retries: 5
 
   # ---------- Единственный модем ----------
   gammu_modem_01:
@@ -37,8 +46,10 @@ services:
     container_name: gammu_modem_01
     restart: always
     privileged: true
-    networks: [smsnet]
-    depends_on: [mariadb]
+    networks: 
+      - smsnet
+    depends_on: 
+      - mariadb
     # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
     devices:
       - /dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0:/dev/modem
@@ -53,3 +64,6 @@ services:
       interval: 1m
       retries: 3
       start_period: 40s
+networks:
+  smsnet:
+    driver: bridge
