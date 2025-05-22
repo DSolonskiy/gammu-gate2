@@ -29,7 +29,7 @@ services:
       - mariadb_data:/var/lib/mysql
       - /home/webadmin/gammu/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
     ports:
-      - "3306:3306"
+      - "33061:3306"
 
   # ---------- Единственный модем ----------
   gammu_modem_01:
