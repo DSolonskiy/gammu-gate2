@@ -61,7 +61,7 @@ services:
     #command: ["sh","/usr/local/bin/start-smsd.sh"]
     command: ["gammu-smsd", "--foreground", "-c", "/etc/gammu/gammu-smsdrc"]
     healthcheck:
-      test: ["CMD","gammu","--identify"]
+      test: ["CMD-SHELL","gammu --identify >/dev/null 2>&1"]
       interval: 1m
       retries: 3
       start_period: 40s
