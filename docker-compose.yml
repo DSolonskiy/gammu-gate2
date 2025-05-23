@@ -3,12 +3,12 @@ version: "3.8"
 ########################
 #  СЕТЬ и VOLUME       #
 ########################
-networks:
-  smsnet:
-    driver: bridge
+#networks:
+#  smsnet:
+#    driver: bridge
 
-volumes:
-  mariadb_data:
+#volumes:
+#  mariadb_data:
 
 ########################
 #  СЕРВИСЫ             #
