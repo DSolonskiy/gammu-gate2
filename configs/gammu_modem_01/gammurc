@@ -1,0 +1,4 @@
+[gammu]
+port       = /dev/modem     ; тот же путь, что и в devices
+connection = at
+logformat  = textall
