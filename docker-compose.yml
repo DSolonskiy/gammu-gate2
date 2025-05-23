@@ -15,30 +15,30 @@ volumes:
 ########################
 services:
   # ---------- База ----------
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
-    restart: always
-    command: --wait_timeout=28800 --interactive_timeout=28800
-    networks: 
-      - smsnet
-    environment:
-      - MYSQL_ROOT_PASSWORD=UP5yeFxRcvtMBzjdfNmT6p
-      - MYSQL_USER=sms-gateway
-      - MYSQL_PASSWORD=Bpj7hXNCextgnzSWckFybV
-      - MYSQL_DATABASE=smsd
-    volumes:
-      - /home/webadmin/gammu/db-init:/var/lib/mysql
+#  mariadb:
+#    image: mariadb:latest
+#    container_name: mariadb
+#    restart: always
+#    command: --wait_timeout=28800 --interactive_timeout=28800
+#    networks: 
+#      - smsnet
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=UP5yeFxRcvtMBzjdfNmT6p
+#      - MYSQL_USER=sms-gateway
+#      - MYSQL_PASSWORD=Bpj7hXNCextgnzSWckFybV
+#      - MYSQL_DATABASE=smsd
+#    volumes:
+#      - /home/webadmin/gammu/db-init:/var/lib/mysql
      # - mariadb_data:/var/lib/mysql
      # - /home/webadmin/gammu/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      start_period: 15s
-      interval: 15s
-      timeout: 5s
-      retries: 5
+#    ports:
+#      - "3306:3306"
+#    healthcheck:
+#      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+#      start_period: 15s
+#      interval: 15s
+#      timeout: 5s
+#      retries: 5
 
   # ---------- Единственный модем ----------
   gammu_modem_01:
@@ -46,10 +46,10 @@ services:
     container_name: gammu_modem_01
     restart: always
     privileged: true
-    networks: 
-      - smsnet
-    depends_on: 
-      - mariadb
+   # networks: 
+   #   - smsnet
+   # depends_on: 
+   #   - mariadb
     # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
     devices:
       - /dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0:/dev/modem
@@ -58,7 +58,8 @@ services:
       - /home/webadmin/gammu/configs/gammu_modem_01:/etc/gammu:ro
       - /home/webadmin/gammu/scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
-    command: ["sh","/usr/local/bin/start-smsd.sh"]
+    #command: ["sh","/usr/local/bin/start-smsd.sh"]
+    command: ["gammu-smsd", "--foreground", "-c", "/etc/gammu/gammu-smsdrc"]
     healthcheck:
       test: ["CMD","gammu","--identify"]
       interval: 1m
