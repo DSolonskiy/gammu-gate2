@@ -46,8 +46,8 @@ services:
     container_name: gammu_modem_01
     restart: always
     privileged: true
-    environment:
-      - GAMMU_CONFIG=/opt/configs/gammu/gammurc
+   # environment:
+   #   - GAMMU_CONFIG=/opt/configs/gammu/gammurc
    # networks: 
    #   - smsnet
    # depends_on: 
