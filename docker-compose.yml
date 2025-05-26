@@ -55,7 +55,7 @@ services:
     # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
     devices:
       #- /dev/serial/by-id/usb-HUAWEI_Technology_HUAWEI_Mobile-if00-port0:/dev/modem
-      - /dev/ttyUSB1:/dev/modem
+      - /dev/ttyUSB2:/dev/modem
     # Конфиги и (опционально) пользовательские скрипты
     volumes:
       - /home/webadmin/gammu/configs/gammu_modem_01:/opt/configs/gammu:ro
