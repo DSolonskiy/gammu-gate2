@@ -72,3 +72,34 @@ services:
       interval: 1m
       retries: 3
       start_period: 40s
+  gammu_modem_02:
+    image: tomaszrim/gammu:latest
+    container_name: gammu_modem_02
+    restart: always
+    privileged: true
+   # environment:
+   #   - GAMMU_CONFIG=/opt/configs/gammu/gammurc
+   # networks: 
+   #   - smsnet
+   # depends_on: 
+   #   - mariadb
+    # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
+    devices:
+      - /dev/ttyS4:/dev/ttyUSB0
+      #- /dev/ttyUSB2:/dev/modem
+    # Конфиги и (опционально) пользовательские скрипты
+    volumes:
+       - /var/snap/docker/common/var-lib-docker/volumes/portainer_data/_data/compose/14/configs/gammu_modem_02:/opt/configs/gammu:ro
+       - /var/snap/docker/common/var-lib-docker/volumes/portainer_data/_data/compose/14//scripts:/usr/local/bin:ro
+      #- /home/webadmin/gammu/configs/gammu_modem_01:/opt/configs/gammu:ro
+      #- /home/webadmin/gammu/scripts:/usr/local/bin:ro
+    # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
+    #command: ["sh","/usr/local/bin/start-smsd.sh"]
+    tmpfs:
+      - /dev/shm
+    command: ["gammu-smsd", "-c", "/opt/configs/gammu/gammu-smsdrc"]
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -x gammu-smsd >/dev/null || exit 1"]
+      interval: 1m
+      retries: 3
+      start_period: 40s
