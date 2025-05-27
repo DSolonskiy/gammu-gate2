@@ -64,6 +64,8 @@ services:
       #- /home/webadmin/gammu/scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
     #command: ["sh","/usr/local/bin/start-smsd.sh"]
+    tmpfs:
+      - /dev/shm
     command: ["gammu-smsd", "-c", "/opt/configs/gammu/gammu-smsdrc"]
     healthcheck:
       test: ["CMD-SHELL", "pgrep -x gammu-smsd >/dev/null || exit 1"]
