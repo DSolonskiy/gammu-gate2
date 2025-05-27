@@ -44,7 +44,7 @@ services:
   gammu_modem_01:
     image: tomaszrim/gammu:latest
     container_name: gammu_modem_01
-    restart: always
+    restart: "no"
     privileged: true
    # environment:
    #   - GAMMU_CONFIG=/opt/configs/gammu/gammurc
