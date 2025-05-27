@@ -9,6 +9,6 @@ host       = 62.76.233.147
 user       = smsd
 password   = @A11bb22cc      ; тот же, что в compose
 database   = smsd
-#runonreceive = /usr/local/bin/on-receive.sh   ; опционально
+#runonreceive = /usr/local/bin/on-receive.sh   ; опционально!!!!!!
 debuglevel = TEXTALL
 phoneid    = sim0
