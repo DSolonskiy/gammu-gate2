@@ -58,8 +58,8 @@ services:
       #- /dev/ttyUSB2:/dev/modem
     # Конфиги и (опционально) пользовательские скрипты
     volumes:
-       - ./data/compose/14/configs/gammu_modem_01:/opt/configs/gammu:ro
-       - ./data/compose/14/scripts:/usr/local/bin:ro
+       - ../data/compose/14/configs/gammu_modem_01:/opt/configs/gammu:ro
+       - ../data/compose/14/scripts:/usr/local/bin:ro
       #- /home/webadmin/gammu/configs/gammu_modem_01:/opt/configs/gammu:ro
       #- /home/webadmin/gammu/scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
