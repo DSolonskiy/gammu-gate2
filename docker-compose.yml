@@ -85,7 +85,7 @@ services:
    #   - mariadb
     # Пробрасываем реальное устройство по by-id внутрь как /dev/modem
     devices:
-      - /dev/ttyS7:/dev/ttyS7
+      - /dev/ttyS7:/dev/ttyUSB0
       #- /dev/ttyUSB2:/dev/modem
     # Конфиги и (опционально) пользовательские скрипты
     volumes:
