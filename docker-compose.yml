@@ -62,9 +62,8 @@ services:
       # - /var/snap/docker/common/var-lib-docker/volumes/portainer_data/_data/compose/14//scripts:/usr/local/bin:ro
       #- /home/webadmin/docker/portainer/data/compose/1/configs/gammu_modem_01:/opt/configs/gammu:ro
       #- /home/webadmin/docker/data/scripts:/usr/local/bin:ro
-      - ../configs/gammu_modem_01:/opt/configs/gammu:ro
-      - ../scripts:/usr/local/bin:ro
-      
+      - ./configs/gammu_modem_01:/opt/configs/gammu:ro
+      - ./scripts:/usr/local/bin:ro 
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
     #command: ["sh","/usr/local/bin/start-smsd.sh"]
     tmpfs:
@@ -96,8 +95,8 @@ services:
       # - /var/snap/docker/common/var-lib-docker/volumes/portainer_data/_data/compose/14//scripts:/usr/local/bin:ro
       #- /home/webadmin/docker/data/configs/gammu_modem_01:/opt/configs/gammu:ro
       #- /home/webadmin/docker/data/scripts:/usr/local/bin:ro
-      - ../configs/gammu_modem_01:/opt/configs/gammu:ro
-      - ../scripts:/usr/local/bin:ro
+      - ./configs/gammu_modem_01:/opt/configs/gammu:ro
+      - ./scripts:/usr/local/bin:ro
     # Запускаем smsd сразу в foreground, чтобы логи шли в stdout
     #command: ["sh","/usr/local/bin/start-smsd.sh"]
     tmpfs:
