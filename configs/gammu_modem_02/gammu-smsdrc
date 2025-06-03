@@ -1,6 +1,6 @@
 [gammu]
 device     = /dev/ttyUSB0
-connection = at
+connection = at19200
 
 [smsd]
 service    = sql
