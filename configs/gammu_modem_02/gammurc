@@ -1,9 +1,4 @@
 [gammu]
-port       = /dev/ttyUSB0     ; тот же путь, что и в devices
-model = at
-connection = at115200
-synchronizetime = yes
-logfile =  /opt/logs/gammu_1_1.log
-logformat = errors
-use_locking = no
-gammuloc = 
+port       = /dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_ADAOb11A921-if00-port0    
+connection = at
+
