@@ -1,5 +1,5 @@
 [gammu]
-device     = /dev/USB0
+device     = /dev/ttyUSB0
 connection = at19200
 
 [smsd]
