@@ -1,4 +1,9 @@
 [gammu]
 port       = /dev/ttyUSB0     ; тот же путь, что и в devices
-connection = at
-logformat  = textall
+model = at
+connection = at115200
+synchronizetime = yes
+logfile = /home/sms.log
+logformat = errors
+use_locking = no
+gammuloc = 
