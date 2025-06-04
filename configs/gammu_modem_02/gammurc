@@ -1,5 +1,5 @@
 [gammu]
-port       = /dev/ttyUSB0     ; тот же путь, что и в devices
+port       = /dev/ttyS7     ; тот же путь, что и в devices
 model = at
 connection = at115200
 synchronizetime = yes
