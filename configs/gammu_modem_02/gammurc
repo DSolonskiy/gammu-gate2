@@ -1,4 +1,4 @@
 [gammu]
-port       = /dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_ADAOb11A921-if00-port0    
+port       = /dev/usb-Prolific_Technology_Inc._USB-Serial_Controller_ADAOb11A921-if00-port0    
 connection = at
 
