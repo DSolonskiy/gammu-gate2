@@ -15,4 +15,4 @@ commtimeout = 30
 sendtimeout = 30
 maxretries = 3
 retrydelay = 10
-phoneid    = sim0
+phoneid    = sim1
