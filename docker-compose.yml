@@ -28,7 +28,6 @@ services:
       - MYSQL_PASSWORD=Bpj7hXNCextgnzSWckFybV
       - MYSQL_DATABASE=smsd
     volumes:
-      - /home/webadmin/gammu/db-init:/var/lib/mysql
       - mariadb_data:/var/lib/mysql
       - /home/webadmin/docker/portainer/data/compose/1/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
     ports:
