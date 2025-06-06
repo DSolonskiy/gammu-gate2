@@ -30,7 +30,7 @@ services:
     volumes:
       - /home/webadmin/gammu/db-init:/var/lib/mysql
       - mariadb_data:/var/lib/mysql
-      - /home/webadmin/gammu/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
+      - /home/webadmin/docker/portainer/data/compose/1/db-init:/docker-entrypoint-initdb.d:ro   # ← новый bind
     ports:
       - "3306:3306"
     healthcheck:
